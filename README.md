@@ -9,4 +9,4 @@ Water intake data was recorded using the Water Reminder app and transferred into
 
 Dataset can be found here: https://drive.google.com/file/d/1iq-Fzh4hFsKsNZeKaLDB5p47npNFmdUC/view?usp=sharing
 
-The final visualization is hosted in Tableau: 
+The final visualization is hosted in Tableau: https://public.tableau.com/shared/4SSQ9GB4D?:display_count=n&:origin=viz_share_link
