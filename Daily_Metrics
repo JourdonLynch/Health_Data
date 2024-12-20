@@ -1,5 +1,4 @@
---Steps data - date was cleaned using the date function to remove timestamp data from dates.Steps_goal was added. Duration was converted from seconds into minutes by dividing by a factor of 60. distance was converted from meters to miles by multiplying by a factor of 0.0006. floors_3m was converted to feet by multiplying by a factor of 3.28 and aliased as floors. Date range was sampled over a two week period between September 23, 2024 and October 6 2024. Results were saved in a new table called steps_clean
-
+--Steps data - date was cleaned using the date function to remove timestamp data from dates.Steps_goal column was added. Duration was converted from seconds into minutes by dividing by a factor of 60. distance was converted from meters to miles by multiplying by a factor of 0.0006. floors_3m was converted to feet by multiplying by a factor of 3.28 and aliased as floors. Date range was sampled over a two week period between September 23, 2024 and October 6 2024. Results were saved in a new table called steps_clean
 
 SELECT
  DATE(date) AS date,
@@ -17,8 +16,7 @@ WHERE
 ORDER BY
  date ASC
 
-
-The average of all columns in the steps_clean table was taken and rounded to two decimal places.
+--The average of all columns in the steps_clean table was taken and rounded to two decimal places.
 SELECT 
  ROUND(AVG(steps),2) as avg_steps,
  ROUND(AVG(miles),2) as avg_miles,
@@ -29,9 +27,7 @@ SELECT
 FROM health.steps_clean
 
 
---Food data - gram denotations were added for clarity and date was ordered in ascending fashion. Results were saved in a new table called food_clean
-
-
+--Food data - gram denotations were added for clarity and date was ordered in ascending fashion. Results were saved in a new table called food_clean.
 SELECT
  Date AS date,
  Calories AS calories,
@@ -60,7 +56,6 @@ SELECT
  protein_g * 4 as calorie_from_protein,
  ROUND(AVG(protein_g) OVER(),2) as avg_grams_of_protein
 
-
 FROM health.food_clean
 
 
@@ -68,7 +63,7 @@ GROUP BY date,calories,fat_g,carbs_g,protein_g
 ORDER BY date ASC
 
 
---Ounces was aliased as water_oz for clarification and water_goal_oz was added. Date was ordered in ascending fashion over a two week period. Results were saved in a new table called water_clean
+--Ounces was aliased as water_oz for clarification and water_goal_oz was added. Date was ordered in ascending order. Results were saved in a new table called water_clean.
 
 SELECT
  date,
@@ -80,18 +75,16 @@ ORDER BY
  date ASC
 
 
---What is the percentage of the water goal met each day? 
+--What was the minimum and maximum water intake over the period? 
 --What was the Average water intake over the period?
---What was the max and minimum water intake over the period?
---Rolling 7 day water intake average
+--What was the percentage of the water goal met each day?
+--What was the Rolling 7 day water intake average?
 
 SELECT
  date,
  water_oz,
  MIN(water_oz) OVER() AS min_intake,
  MAX(water_oz) OVER() AS max_intake,
-
-
  water_goal_oz,
  ROUND((water_oz/water_goal_oz)*100,1) ||' %' AS percent_of_goal_met,
  ROUND(AVG(water_oz) OVER(ORDER BY date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW ),2) AS seven_day_moving_average
@@ -101,7 +94,7 @@ SELECT
  ORDER BY date ASC
 
 
---A Common table expression was employed to calculate metabolic rate using the Mifflin-St Jeor equation: BMR = 10W + 3.098H - 5.0A + 5. 
+--A Common table expression was employed to calculate metabolic rate using the Mifflin-St Jeor equation: BMR = 10W + 3.098H - 5.0A + 5. Weight = W , H = Height, and A = Age.
 
 WITH
 metabolic_rate AS (
@@ -111,7 +104,7 @@ SELECT
 FROM
   health.steps)
 
---The steps column was divided by steps goal, multiplied by 100, rounded to two decimal places, and concatenated with a percent sign. BMR was rounded to two decimal places. Column  s.calories was aliased as calories_burned. BMR and S.calories  were added and rounded to two decimal places and aliased as total_caloric_expense. f.calories was aliased as caloric_intake. Column s.calories and BMR was subtracted from f.calories and rounded to two decimal places and aliased as net_calories. A window function was used to calculate the sum of net calories over the period, rounded to two decimal places and aliased as net_calories_over_period. The same syntax was repeated with the addition of dividing the result of the window function by 3500 which is the caloric equivalent of one pound and aliased as weight_change_over_period.
+--The steps column was divided by steps goal, multiplied by 100, and rounded to two decimal places, and concatenated with a percent sign. BMR was rounded to two decimal places. Column s.calories was aliased as calories_burned. BMR and S.calories were added and rounded to two decimal places and aliased as total_caloric_expense. f.calories was aliased as caloric_intake. Column s.calories and BMR was subtracted from f.calories and rounded to two decimal places and aliased as net_calories. A window function was used to calculate the sum of net calories over the period, rounded to two decimal places and aliased as net_calories_over_period. The same syntax was repeated with the addition of dividing the result of the window function by 3500 which is the caloric equivalent of one pound of fat and aliased as weight_change_over_period.
 
 SELECT
 F.date,
@@ -126,7 +119,7 @@ ROUND(SUM(F.calories - ( S.calories + BMR)) OVER(),2) AS net_calories_over_perio
 ROUND((SUM(F.calories - ( S.calories + BMR)) OVER())/3500,2) AS weight_change_over_period
 
 
---Steps_clean table was aliased as S and joined on food_clean table aliased as F. Join was made on the F.date and S.date column. Metabolic rate CTE was aliased as M and joined on steps_clean table . Join was made on the M.date and S.date column.
+--Steps_clean table was aliased as S and joined on food_clean table aliased as F. Join was made on the F.date and S.date column. The metabolic rate CTE was aliased as M and joined on steps_clean table. The join was made on the M.date and S.date column.
 
 FROM
 health.food_clean AS F
@@ -138,5 +131,4 @@ JOIN
 metabolic_rate AS M
 ON
 M.date = S.date
-
 ORDER BY F.date ASC
