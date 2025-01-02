@@ -7,6 +7,8 @@ Movement data was collected using the StepsApp and exported as a csv file. Data 
 
 Water intake data was recorded using the Water Reminder app and transferred into an excel file for processing. Fields consisted of date and water intake measured in ounces with each row representing a day.
 
+Report can be found here: https://docs.google.com/document/d/100KW1LUBxjbOf3e_Pj3DDSHx4ettMqbVSgqKWomBCSo/edit?usp=sharing
+
 Dataset can be found here: https://drive.google.com/file/d/1iq-Fzh4hFsKsNZeKaLDB5p47npNFmdUC/view?usp=sharing
 
 The final visualization is hosted in Tableau: https://public.tableau.com/shared/4SSQ9GB4D?:display_count=n&:origin=viz_share_link
