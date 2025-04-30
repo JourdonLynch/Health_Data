@@ -1,6 +1,6 @@
 
 ## Summary:
-The purpose of this project and related data is to track the five main macronutrients and their related caloric values over a two-week period. The basal metabolic rate (BMR) and average calories burned were subtracted from this to find net calories each day. An initial dashboard to track macronutrients was created as well as a  secondary dashboardmallowing for individual BMI, BMR, and net calories to be calculated were created. The final visualization is hosted in Tableau: https://public.tableau.com/shared/4SSQ9GB4D?:display_count=n&:origin=viz_share_link
+The purpose of this project and related data is to track the five main macronutrients and their related caloric values over a two-week period. The basal metabolic rate (BMR) and average calories burned were subtracted from this to find net calories each day. An initial dashboard to track macronutrients was created as well as a  secondary dashboardmallowing for individual BMI, BMR, and net calories to be calculated were created. The final visualization is hosted in Tableau:https://public.tableau.com/shared/4SSQ9GB4D?:display_count=n&:origin=viz_share_link
 
 ## Dataset:
 Daily food reports were collected over a two week period using my Net Diary and exported as a csv file. Only the main five categories Calories, Fat, Carbs, Protein, and fiber were kept as fields with each row representing a day. All categories except calories were recorded in grams
