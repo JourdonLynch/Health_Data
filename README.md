@@ -9,7 +9,7 @@ Movement data was collected using the StepsApp and exported as a csv file. Data 
 
 Water intake data was recorded using the Water Reminder app and transferred into an excel file for processing. Fields consisted of date and water intake measured in ounces with each row representing a day.
 
-## Intro:
+## Introduction:
 In order to upkeep basic bodily functions such as breathing and body temperature, the human body burns calories. This varies between individuals and is known as the basal metabolic rate (BMR). This can be calculated once age, weight, and height are accounted for. This, in addition to the daily calories burned through exercise, accounts for the calories burned each day. In order to maintain homeostasis, an equivalent amount of calories must be consumed on a daily basis.
 
 ## Methodology:
